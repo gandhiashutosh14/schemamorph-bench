@@ -1,0 +1,450 @@
+[
+  {
+    "case": "rename",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "email_address": null,
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "order_date": null,
+      "status": "status",
+      "item_count": null,
+      "region": "region"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": false,
+    "semantic_values_ok": true,
+    "semantic_failures": [
+      "email_address: mapped to None but derives from customer_email",
+      "order_date: mapped to None but derives from placed_at",
+      "item_count: mapped to None but derives from items"
+    ],
+    "unmapped_targets": [
+      "email_address",
+      "item_count",
+      "order_date"
+    ],
+    "lost_sources": [
+      "customer_email",
+      "items",
+      "placed_at"
+    ],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "rename",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "email_address": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "order_date": "placed_at",
+      "status": "status",
+      "item_count": "items",
+      "region": "region"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "correct"
+  },
+  {
+    "case": "drop_column",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [
+      "region"
+    ],
+    "verdict": "correct"
+  },
+  {
+    "case": "drop_column",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [
+      "region"
+    ],
+    "verdict": "correct"
+  },
+  {
+    "case": "type_change",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "not defined",
+    "round_trip_note": "types differ between target and base for a mapped column, so put() would need a conversion",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "correct"
+  },
+  {
+    "case": "type_change",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "not defined",
+    "round_trip_note": "types differ between target and base for a mapped column, so put() would need a conversion",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "correct"
+  },
+  {
+    "case": "unit_change",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region",
+      "order_total": null,
+      "shipping_cost": null
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": false,
+    "semantic_values_ok": true,
+    "semantic_failures": [
+      "order_total: mapped to None but derives from order_total_cents",
+      "shipping_cost: mapped to None but derives from shipping_cost_cents"
+    ],
+    "unmapped_targets": [
+      "order_total",
+      "shipping_cost"
+    ],
+    "lost_sources": [
+      "order_total_cents",
+      "shipping_cost_cents"
+    ],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "unit_change",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region",
+      "order_total": "order_total_cents",
+      "shipping_cost": "shipping_cost_cents"
+    },
+    "structural_ok": false,
+    "structural_failures": [
+      "applying the mapping raised ValueError: invalid literal for int() with base 10: '2489.77'"
+    ],
+    "round_trip": "not defined",
+    "round_trip_note": "types differ between target and base for a mapped column, so put() would need a conversion",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "structural failure"
+  },
+  {
+    "case": "lossy_rounding",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region",
+      "order_total_rounded": null
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "not defined",
+    "round_trip_note": "the case is lossy: some values cannot be reconstructed from the target",
+    "semantic_columns_ok": false,
+    "semantic_values_ok": true,
+    "semantic_failures": [
+      "order_total_rounded: mapped to None but derives from order_total_cents"
+    ],
+    "unmapped_targets": [
+      "order_total_rounded"
+    ],
+    "lost_sources": [
+      "order_total_cents"
+    ],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "lossy_rounding",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region",
+      "order_total_rounded": "order_total_cents"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "not defined",
+    "round_trip_note": "the case is lossy: some values cannot be reconstructed from the target",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": false,
+    "semantic_failures": [
+      "order_total_cents: value 2490 after mapping, base has 248977"
+    ],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "reorder",
+    "mapper": "static",
+    "mapping": {
+      "region": "region",
+      "items": "items",
+      "status": "status",
+      "placed_at": "placed_at",
+      "currency": "currency",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "order_total_cents": "order_total_cents",
+      "customer_email": "customer_email",
+      "order_id": "order_id"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "correct"
+  },
+  {
+    "case": "reorder",
+    "mapper": "name_baseline",
+    "mapping": {
+      "region": "region",
+      "items": "items",
+      "status": "status",
+      "placed_at": "placed_at",
+      "currency": "currency",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "order_total_cents": "order_total_cents",
+      "customer_email": "customer_email",
+      "order_id": "order_id"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "correct"
+  },
+  {
+    "case": "swap",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": false,
+    "semantic_values_ok": false,
+    "semantic_failures": [
+      "order_total_cents: mapped to order_total_cents but derives from shipping_cost_cents",
+      "shipping_cost_cents: mapped to shipping_cost_cents but derives from order_total_cents",
+      "order_total_cents: value 499 after mapping, base has 248977"
+    ],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "swap",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "customer_email": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items",
+      "region": "region"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "ok",
+    "round_trip_note": "put(get(t)) == t on every sampled row; this checks self-consistency of the mapping, not its meaning",
+    "semantic_columns_ok": false,
+    "semantic_values_ok": false,
+    "semantic_failures": [
+      "order_total_cents: mapped to order_total_cents but derives from shipping_cost_cents",
+      "shipping_cost_cents: mapped to shipping_cost_cents but derives from order_total_cents",
+      "order_total_cents: value 499 after mapping, base has 248977"
+    ],
+    "unmapped_targets": [],
+    "lost_sources": [],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "compound",
+    "mapper": "static",
+    "mapping": {
+      "order_id": "order_id",
+      "email_address": null,
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "not defined",
+    "round_trip_note": "types differ between target and base for a mapped column, so put() would need a conversion",
+    "semantic_columns_ok": false,
+    "semantic_values_ok": true,
+    "semantic_failures": [
+      "email_address: mapped to None but derives from customer_email"
+    ],
+    "unmapped_targets": [
+      "email_address"
+    ],
+    "lost_sources": [
+      "customer_email",
+      "region"
+    ],
+    "verdict": "structurally valid, semantically wrong"
+  },
+  {
+    "case": "compound",
+    "mapper": "name_baseline",
+    "mapping": {
+      "order_id": "order_id",
+      "email_address": "customer_email",
+      "order_total_cents": "order_total_cents",
+      "shipping_cost_cents": "shipping_cost_cents",
+      "currency": "currency",
+      "placed_at": "placed_at",
+      "status": "status",
+      "items": "items"
+    },
+    "structural_ok": true,
+    "structural_failures": [],
+    "round_trip": "not defined",
+    "round_trip_note": "types differ between target and base for a mapped column, so put() would need a conversion",
+    "semantic_columns_ok": true,
+    "semantic_values_ok": true,
+    "semantic_failures": [],
+    "unmapped_targets": [],
+    "lost_sources": [
+      "region"
+    ],
+    "verdict": "correct"
+  }
+]
