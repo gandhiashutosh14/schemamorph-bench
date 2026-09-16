@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schemamorph-bench"
+version = "0.1.0a1"
+description = "A reproducible schema-drift benchmark: seeded transformations with ground truth, and a harness that scores mappers on structural validity, round trip and semantic correctness separately."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ashutosh Gandhi" }]
+keywords = ["schema-matching", "schema-drift", "data-integration", "benchmark", "lenses"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+schemamorph-bench = "schemamorph_bench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["schemamorph_bench*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
