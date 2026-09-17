@@ -1,6 +1,6 @@
 # Schema-drift benchmark
 
-Generated 2026-09-16 18:20 UTC at revision fc1bd94 with `schemamorph-bench run --rows 200 --seed 7 --out reports/benchmark.md`. 200 synthetic rows (seed 7), 8 transformations, 2 deterministic mappers. Structural validity, round-trip behaviour and semantic correctness are scored separately; a round trip that passes proves self-consistency of the mapping, not that a column carries the right meaning.
+Generated 2026-09-16 18:20 UTC at revision b1e1e73 with `schemamorph-bench run --rows 200 --seed 7 --out reports/benchmark.md`. 200 synthetic rows (seed 7), 8 transformations, 2 deterministic mappers. Structural validity, round-trip behaviour and semantic correctness are scored separately; a round trip that passes proves self-consistency of the mapping, not that a column carries the right meaning.
 
 | Case | What changed | Mapper | Structural | Round trip | Semantic (columns / values) | Verdict | Unmapped targets | Lost sources |
 |---|---|---|---|---|---|---|---|---|
